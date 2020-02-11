@@ -191,3 +191,13 @@ void hardware_command_order_light(int floor, HardwareOrder order_type, int on){
         io_clear_bit(light_bit_lookup[floor][type_bit]);
     }
 }
+
+
+int hardware_check_at_floor(){
+    for (int i=0; i<HARDWARE_NUMBER_OF_FLOORS;i++){
+        if(hardware_read_floor_sensor(i)){
+            return 1;
+        }
+    }
+    return 0;
+}

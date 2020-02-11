@@ -3,7 +3,11 @@
 
 #include "hardware.h"
 
+static 
+
 void FSM_init();
+
+void FSM_StateMachine();
 
 
 #endif

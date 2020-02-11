@@ -30,6 +30,13 @@ typedef enum {
     HARDWARE_ORDER_DOWN
 } HardwareOrder;
 
+typedef enum {
+    HARDWARE_FLOOR_1,
+    HARDWARE_FLOOR_2,
+    HARDWARE_FLOOR_3,
+    HARDWARE_FLOOR_4
+} HardwareFloor;
+
 /**
  * @brief Initializes the elevator control hardware.
  * Must be called once before other calls to the elevator
@@ -121,5 +128,7 @@ void hardware_command_stop_light(int on);
  * 0 to turn it off.
  */
 void hardware_command_order_light(int floor, HardwareOrder order_type, int on);
+
+int hardware_check_at_floor();
 
 #endif
