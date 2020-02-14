@@ -30,12 +30,15 @@ typedef enum {
     HARDWARE_ORDER_DOWN
 } HardwareOrder;
 
-typedef enum {
+typedef enum{
     HARDWARE_FLOOR_1,
     HARDWARE_FLOOR_2,
     HARDWARE_FLOOR_3,
-    HARDWARE_FLOOR_4
+    HARDWARE_FLOOR_4,
+    HARDWARE_FLOOR_UNDEFINED
 } HardwareFloor;
+
+static HardwareFloor m_current_floor;
 
 /**
  * @brief Initializes the elevator control hardware.
