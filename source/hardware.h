@@ -31,6 +31,7 @@ typedef enum {
     HARDWARE_ORDER_DOWN
 } HardwareOrder;
 
+// Kan vi fjerne denne?
 typedef enum{
     HARDWARE_FLOOR_1,
     HARDWARE_FLOOR_2,
