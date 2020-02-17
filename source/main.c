@@ -10,7 +10,7 @@ int main(){
         fprintf(stderr, "Unable to initialize hardware\n");
         exit(1);
     }
-
+    //Skal vi sette denne inni?
     FSM_init();
 
     while(1){
