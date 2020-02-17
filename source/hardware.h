@@ -42,6 +42,8 @@ typedef enum {
 
 int g_current_floor;
 
+int hardware_legal_floor(int floor, HardwareOrder order_type);
+
 /**
  * @brief Initializes the elevator control hardware.
  * Must be called once before other calls to the elevator

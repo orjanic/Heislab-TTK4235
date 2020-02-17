@@ -4,7 +4,7 @@
 
 #include <stdlib.h>
 
-static int hardware_legal_floor(int floor, HardwareOrder order_type){
+int hardware_legal_floor(int floor, HardwareOrder order_type){
     int lower_floor = 0;
     int upper_floor = HARDWARE_NUMBER_OF_FLOORS - 1;
 

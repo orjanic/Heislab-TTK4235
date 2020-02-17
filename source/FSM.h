@@ -3,6 +3,7 @@
 
 #include "hardware.h"
 #include "order.h"
+#include "timer.h"
 
 typedef enum{
     STATE_INIT,
@@ -20,12 +21,14 @@ State m_current_state;
 
 void FSM_init();
 
-void FSM_StateMachine();
+void FSM_state_machine();
 
 void FSM_idle();
 
-void FSM_order_execution(Order* order);
+void FSM_order_dir_up();
 
+void FSM_order_dir_down();
 
+void FSM_open_door();
 
 #endif

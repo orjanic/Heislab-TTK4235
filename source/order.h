@@ -2,6 +2,7 @@
 #define ORDER_H
 
 #include "hardware.h"
+#include "FSM.h"
 
 typedef struct {
     HardwareOrder order_type;
@@ -10,11 +11,16 @@ typedef struct {
 } Order;
 
 Order order_list[HARDWARE_NUMBER_OF_ORDER_TYPES][HARDWARE_NUMBER_OF_FLOORS];
+Order* g_current_order;
 
 void order_init_list();
 
 int order_update_list();
 
+void order_remove(int floor);
 
+int order_check_for_order();
+
+void order_queue();
 
 #endif

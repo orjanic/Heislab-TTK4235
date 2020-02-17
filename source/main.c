@@ -3,6 +3,7 @@
 #include "hardware.h"
 #include "FSM.h"
 #include "order.h"
+#include "timer.h"
 
 
 int main(){
@@ -12,9 +13,14 @@ int main(){
         exit(1);
     }
     //Skal vi sette denne inni?
-    FSM_init();
+    //FSM_init();
+    //FSM_idle();
+    //FSM_order_dir_up();
+    //timer_door();
+    //FSM_order_dir_down();
+    FSM_state_machine();
 
-
+/*
     while(1){
         order_update_list();
         if(hardware_read_stop_signal()){
@@ -32,7 +38,7 @@ int main(){
         }
     }
 
-    printf("=== Example Program ===\n");/*
+    printf("=== Example Program ===\n");
     printf("Press the stop button on the elevator panel to exit\n");
 
     hardware_command_movement(HARDWARE_MOVEMENT_UP);
