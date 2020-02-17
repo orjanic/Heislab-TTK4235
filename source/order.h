@@ -5,13 +5,16 @@
 
 typedef struct {
     HardwareOrder order_type;
-    HardwareFloor order_floor;
+    int order_floor;
     int order_active;
 } Order;
 
-static Order order_list[HARDWARE_NUMBER_OF_ORDER_TYPES][HARDWARE_NUMBER_OF_FLOORS];
+Order order_list[HARDWARE_NUMBER_OF_ORDER_TYPES][HARDWARE_NUMBER_OF_FLOORS];
 
-void order_update_list();
+void order_init_list();
+
+int order_update_list();
+
 
 
 #endif

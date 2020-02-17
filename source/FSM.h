@@ -2,6 +2,7 @@
 #define FSM_H
 
 #include "hardware.h"
+#include "order.h"
 
 typedef enum{
     STATE_INIT,
@@ -13,13 +14,18 @@ typedef enum{
     STATE_STOP_NAT_FLOOR
 } State;
 
-static State m_current_state;
+State m_current_state;
 
 
 
 void FSM_init();
 
 void FSM_StateMachine();
+
+void FSM_idle();
+
+void FSM_order_execution(Order* order);
+
 
 
 #endif

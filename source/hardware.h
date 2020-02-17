@@ -32,15 +32,15 @@ typedef enum {
 } HardwareOrder;
 
 // Kan vi fjerne denne?
-typedef enum{
-    HARDWARE_FLOOR_1,
-    HARDWARE_FLOOR_2,
-    HARDWARE_FLOOR_3,
-    HARDWARE_FLOOR_4,
-    HARDWARE_FLOOR_UNDEFINED
-} HardwareFloor;
+// typedef enum{
+//     HARDWARE_FLOOR_1,
+//     HARDWARE_FLOOR_2,
+//     HARDWARE_FLOOR_3,
+//     HARDWARE_FLOOR_4,
+//     HARDWARE_FLOOR_UNDEFINED
+// } HardwareFloor;
 
-static HardwareFloor m_current_floor;
+int g_current_floor;
 
 /**
  * @brief Initializes the elevator control hardware.
@@ -135,5 +135,7 @@ void hardware_command_stop_light(int on);
 void hardware_command_order_light(int floor, HardwareOrder order_type, int on);
 
 int hardware_check_at_floor();
+
+void hardware_lights_off();
 
 #endif

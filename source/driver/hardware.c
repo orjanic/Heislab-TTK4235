@@ -193,11 +193,21 @@ void hardware_command_order_light(int floor, HardwareOrder order_type, int on){
 }
 
 int hardware_check_at_floor(){
-    for (int i=0; i<HARDWARE_NUMBER_OF_FLOORS;i++){
+    for (int i=0; i < HARDWARE_NUMBER_OF_FLOORS; i++){
         if(hardware_read_floor_sensor(i)){
-            m_current_floor=(HardwareFloor)i;
+            g_current_floor=i;
             return 1;
         }
     }
     return 0;
+}
+
+void hardware_lights_off(){
+    for (int ot=0; ot<HARDWARE_NUMBER_OF_ORDER_TYPES;ot++){
+        for (int f=0;f<HARDWARE_NUMBER_OF_FLOORS; f++){
+            if (hardware_legal_floor(f,(HardwareOrder)ot)) {
+                hardware_command_order_light(f,(HardwareOrder)ot,0);
+            }
+        }
+    }
 }

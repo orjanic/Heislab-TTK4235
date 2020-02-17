@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "hardware.h"
 #include "FSM.h"
+#include "order.h"
 
 
 int main(){
@@ -13,7 +14,9 @@ int main(){
     //Skal vi sette denne inni?
     FSM_init();
 
+
     while(1){
+        order_update_list();
         if(hardware_read_stop_signal()){
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             break;

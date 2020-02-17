@@ -1,7 +1,8 @@
 #include "FSM.h"
 
 void FSM_init(){
-    m_current_floor=HARDWARE_FLOOR_UNDEFINED;
+    hardware_lights_off();
+    order_init_list();
     hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
 	while(1){
         if (hardware_check_at_floor()){
@@ -20,12 +21,14 @@ void FSM_StateMachine() {
                 break;
             
             case STATE_IDLE:
+
                 break;
             
             case STATE_OPEN_DOOR:
                 break;
             
             case STATE_DIR_UP:
+
                 break;
             
             case STATE_DIR_DOWN:
@@ -38,5 +41,25 @@ void FSM_StateMachine() {
                 break;
             
         }
+    }
+}
+
+void FSM_idle(){
+    while(m_current_state==STATE_IDLE) {
+        if (order_update_list()) {
+            for (int ot=0; ot<HARDWARE_NUMBER_OF_ORDER_TYPES;ot++){
+                for (int f=0;f<HARDWARE_NUMBER_OF_FLOORS; f++){
+                    if (order_list[ot][f].order_active) {
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+void FSM_order_execution(Order* order) {
+    if (order->order_active){
+
     }
 }
