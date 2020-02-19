@@ -193,9 +193,10 @@ void hardware_command_order_light(int floor, HardwareOrder order_type, int on){
 }
 
 int hardware_check_at_floor(){
-    for (int i=0; i < HARDWARE_NUMBER_OF_FLOORS; i++){
-        if(hardware_read_floor_sensor(i)){
-            g_current_floor=i;
+    for (int f=0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
+        if(hardware_read_floor_sensor(f)){
+            g_current_floor=f;
+            hardware_command_floor_indicator_on(f);
             return 1;
         }
     }

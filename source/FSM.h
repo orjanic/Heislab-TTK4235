@@ -4,6 +4,8 @@
 #include "hardware.h"
 #include "order.h"
 #include "timer.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef enum{
     STATE_INIT,
@@ -12,7 +14,7 @@ typedef enum{
     STATE_DIR_UP,
     STATE_DIR_DOWN,
     STATE_STOP_AT_FLOOR,
-    STATE_STOP_NAT_FLOOR
+    STATE_STOP_NOT_AT_FLOOR
 } State;
 
 State m_current_state;
@@ -30,5 +32,11 @@ void FSM_order_dir_up();
 void FSM_order_dir_down();
 
 void FSM_open_door();
+
+void FSM_choose_next_state();
+
+void FSM_check_stop();
+
+void FSM_stop_at_floor();
 
 #endif

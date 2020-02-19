@@ -33,6 +33,12 @@ void order_remove(int floor) {
     }
 }
 
+void order_remove_all() {
+    for (int f=0;f<HARDWARE_NUMBER_OF_FLOORS; f++){
+        order_remove(f);
+    }
+}
+
 int order_check_for_order(){
     for (int ot=0; ot<HARDWARE_NUMBER_OF_ORDER_TYPES;ot++){
         for (int f=0;f<HARDWARE_NUMBER_OF_FLOORS; f++){
@@ -44,27 +50,37 @@ int order_check_for_order(){
     return 0;
 }
 
-void order_queue(){
-    if (g_current_order->order_active){
-        if (g_current_order->order_floor < g_current_floor) {
-            m_current_state = STATE_DIR_DOWN;
-        } else {
-            m_current_state = STATE_DIR_UP;
-        }
-    } else if (!order_check_for_order()) { 
-        m_current_state=STATE_IDLE;
-    } else {
-        for (int ot=0; ot<HARDWARE_NUMBER_OF_ORDER_TYPES;ot++){
-            for (int f=0;f<HARDWARE_NUMBER_OF_FLOORS; f++){
+void order_choose_next_order() {
+    if (g_current_floor < HARDWARE_NUMBER_OF_FLOORS/2) {
+        for (int f = HARDWARE_NUMBER_OF_FLOORS-1; f >= 0; f--) {
+            for (int ot=0; ot<HARDWARE_NUMBER_OF_ORDER_TYPES;ot++){
                 if (order_list[ot][f].order_active) {
-                    g_current_order=&order_list[ot][f];
+                    g_current_order = &order_list[ot][f];
+                    return;
                 }
             }
         }
-        if (g_current_order->order_floor < g_current_floor) {
-            m_current_state = STATE_DIR_DOWN;
-        } else {
-            m_current_state = STATE_DIR_UP;
+    }
+    else {
+        for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++) {
+            for (int ot=0; ot<HARDWARE_NUMBER_OF_ORDER_TYPES;ot++){
+                if (order_list[ot][f].order_active) {
+                    g_current_order = &order_list[ot][f];
+                    return;
+                }
+            }
         }
     }
 }
+
+void order_queue(){
+    if (g_current_order->order_active){
+        FSM_choose_next_state();
+    } else if (!order_check_for_order()) { 
+        m_current_state=STATE_IDLE;
+    } else {
+        order_choose_next_order();
+        FSM_choose_next_state();
+    } 
+}
+
