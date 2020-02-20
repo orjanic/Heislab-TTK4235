@@ -17,7 +17,7 @@ typedef enum{
     STATE_STOP_NOT_AT_FLOOR
 } State;
 
-State m_current_state;
+State g_current_state;
 
 
 

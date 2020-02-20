@@ -3,8 +3,7 @@
 
 #include "hardware.h"
 #include "FSM.h"
-#include <stdio.h>
-#include <stdlib.h>
+
 
 typedef struct {
     HardwareOrder order_type;

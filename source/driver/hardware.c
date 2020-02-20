@@ -2,21 +2,21 @@
 #include "channels.h"
 #include "io.h"
 
-#include <stdlib.h>
+//#include <stdlib.h>
 
-int hardware_legal_floor(int floor, HardwareOrder order_type){
+int hardware_legal_floor(int floor, HardwareOrder order_type) {
     int lower_floor = 0;
     int upper_floor = HARDWARE_NUMBER_OF_FLOORS - 1;
 
-    if(floor < lower_floor || floor > upper_floor){
+    if((floor < lower_floor) || (floor > upper_floor)){
         return 0;
     }
 
-    if(floor == lower_floor && order_type == HARDWARE_ORDER_DOWN){
+    if((floor == lower_floor) && (order_type == HARDWARE_ORDER_DOWN)){
         return 0;
     }
 
-    if(floor == upper_floor && order_type == HARDWARE_ORDER_UP){
+    if((floor == upper_floor) && (order_type == HARDWARE_ORDER_UP)){
         return 0;
     }
 
@@ -192,10 +192,10 @@ void hardware_command_order_light(int floor, HardwareOrder order_type, int on){
     }
 }
 
-int hardware_check_at_floor(){
-    for (int f=0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
-        if(hardware_read_floor_sensor(f)){
-            g_current_floor=f;
+int hardware_check_at_floor() {
+    for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++) {
+        if(hardware_read_floor_sensor(f)) {
+            g_current_floor = f;
             hardware_command_floor_indicator_on(f);
             return 1;
         }
@@ -203,11 +203,11 @@ int hardware_check_at_floor(){
     return 0;
 }
 
-void hardware_lights_off(){
-    for (int ot=0; ot<HARDWARE_NUMBER_OF_ORDER_TYPES;ot++){
-        for (int f=0;f<HARDWARE_NUMBER_OF_FLOORS; f++){
-            if (hardware_legal_floor(f,(HardwareOrder)ot)) {
-                hardware_command_order_light(f,(HardwareOrder)ot,0);
+void hardware_lights_off() {
+    for (int ot = 0; ot < HARDWARE_NUMBER_OF_ORDER_TYPES; ot++) {
+        for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++) {
+            if (hardware_legal_floor(f, (HardwareOrder)ot)) {
+                hardware_command_order_light(f, (HardwareOrder)ot, 0);
             }
         }
     }
