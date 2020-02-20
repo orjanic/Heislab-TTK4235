@@ -31,16 +31,8 @@ typedef enum {
     HARDWARE_ORDER_DOWN
 } HardwareOrder;
 
-// Kan vi fjerne denne?
-// typedef enum{
-//     HARDWARE_FLOOR_1,
-//     HARDWARE_FLOOR_2,
-//     HARDWARE_FLOOR_3,
-//     HARDWARE_FLOOR_4,
-//     HARDWARE_FLOOR_UNDEFINED
-// } HardwareFloor;
-
 int g_current_floor;
+int g_current_floor_pos;
 
 int hardware_legal_floor(int floor, HardwareOrder order_type);
 

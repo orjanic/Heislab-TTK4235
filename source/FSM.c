@@ -8,6 +8,7 @@ void FSM_init(){
 	while(1){
         if (hardware_check_at_floor()){
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+            g_current_floor_pos = 0;
             break;
         } 
     }
@@ -102,6 +103,7 @@ void FSM_order_dir_down() {
 }
 
 void FSM_open_door(){
+    g_current_floor_pos = 0;
     hardware_command_door_open(1);
     order_remove(g_current_floor);
     timer_door();
@@ -111,12 +113,18 @@ void FSM_open_door(){
 }
 
 void FSM_choose_next_state(){
-    if (g_current_order->order_floor==g_current_floor){
+    if ((g_current_order->order_floor==g_current_floor) && (g_current_floor_pos==0)){
         m_current_state=STATE_OPEN_DOOR;
-    }else if(g_current_order->order_floor<g_current_floor){
+    }else if(g_current_order->order_floor<g_current_floor || ((g_current_order->order_floor==g_current_floor) && (g_current_floor_pos==1))){
         m_current_state=STATE_DIR_DOWN;
+        if (hardware_check_at_floor()) {
+            g_current_floor_pos = -1;
+        }
     }else {
         m_current_state=STATE_DIR_UP;
+        if (hardware_check_at_floor()) {
+            g_current_floor_pos = 1;
+        }
     }
 }
 
