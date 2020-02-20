@@ -6,7 +6,7 @@ void timer_door(){
         FSM_check_stop();
         order_update_list();
         order_remove(g_current_floor);
-        if (hardware_read_obstruction_signal()) {
+        if (hardware_read_obstruction_signal() || hardware_read_order(g_current_floor, HARDWARE_ORDER_UP) || hardware_read_order(g_current_floor, HARDWARE_ORDER_DOWN) || hardware_read_order(g_current_floor, HARDWARE_ORDER_INSIDE)) {
             start = clock();
         }
     }

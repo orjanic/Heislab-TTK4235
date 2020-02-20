@@ -39,4 +39,6 @@ void FSM_check_stop();
 
 void FSM_stop_at_floor();
 
+void FSM_stop_not_at_floor();
+
 #endif

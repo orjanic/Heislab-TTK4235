@@ -44,9 +44,7 @@ void FSM_state_machine() {
                 break;
             
             case STATE_STOP_NOT_AT_FLOOR:
-                hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-                order_remove_all();
-                m_current_state=STATE_IDLE;
+                FSM_stop_not_at_floor();
                 break;
             
         }
@@ -147,4 +145,13 @@ void FSM_stop_at_floor() {
     while(hardware_read_stop_signal());
     hardware_command_stop_light(0);
     m_current_state=STATE_OPEN_DOOR;
+}
+
+void FSM_stop_not_at_floor(){
+    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+    hardware_command_stop_light(1);
+    order_remove_all();
+    while(hardware_read_stop_signal());
+    hardware_command_stop_light(0);
+    m_current_state=STATE_IDLE;
 }
