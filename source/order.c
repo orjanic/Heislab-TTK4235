@@ -51,6 +51,46 @@ int order_check_for_order() {
 }
 
 void order_choose_next_order() {
+    if ((g_current_floor == 1) && (g_last_direction == -1) && ((order_list[0][0].order_active) || (order_list[1][0].order_active) || (order_list[2][0].order_active))) {
+        for (int ot = 0; ot < HARDWARE_NUMBER_OF_ORDER_TYPES; ot++) {
+            if (order_list[ot][0].order_active) {
+                g_current_order = &order_list[ot][0];
+                return;
+            }
+        }
+    }
+
+    else if ((g_current_floor == 0) || (g_current_floor == 1)) {
+       for (int f = HARDWARE_NUMBER_OF_FLOORS - 1; f >= 0; f--) {
+            for (int ot = 0; ot < HARDWARE_NUMBER_OF_ORDER_TYPES; ot++) {
+                if (order_list[ot][f].order_active) {
+                    g_current_order = &order_list[ot][f];
+                    return;
+                }
+            }
+        }
+    }
+
+    else if ((g_current_floor == 2) && (g_last_direction == 1) && ((order_list[0][3].order_active) || (order_list[1][3].order_active) || (order_list[2][3].order_active))) {
+        for (int ot = 0; ot < HARDWARE_NUMBER_OF_ORDER_TYPES; ot++) {
+            if (order_list[ot][3].order_active) {
+                g_current_order = &order_list[ot][3];
+                return;
+            }
+        }
+    }
+
+    else if ((g_current_floor == 2) || (g_current_floor == 3)) {
+        for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++) {
+            for (int ot = 0; ot < HARDWARE_NUMBER_OF_ORDER_TYPES; ot++){
+                if (order_list[ot][f].order_active) {
+                    g_current_order = &order_list[ot][f];
+                    return;
+                }
+            }
+        }
+    }
+    /*
     if (g_current_floor < HARDWARE_NUMBER_OF_FLOORS/2) {
         for (int f = HARDWARE_NUMBER_OF_FLOORS - 1; f >= 0; f--) {
             for (int ot = 0; ot < HARDWARE_NUMBER_OF_ORDER_TYPES; ot++){
@@ -71,6 +111,7 @@ void order_choose_next_order() {
             }
         }
     }
+    */
 }
 
 void order_queue() {

@@ -73,6 +73,7 @@ void FSM_idle(){
 }
 
 void FSM_order_dir_up() {
+    g_last_direction = 1; //---------------------------------------------------------
     if (g_current_order->order_active) {
         hardware_command_movement(HARDWARE_MOVEMENT_UP);
         while (g_current_state == STATE_DIR_UP){
@@ -87,6 +88,7 @@ void FSM_order_dir_up() {
 }
 
 void FSM_order_dir_down() {
+    g_last_direction = -1; //-------------------------------------------------------------
     if (g_current_order->order_active){
         hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
         while (g_current_state == STATE_DIR_DOWN){

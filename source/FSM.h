@@ -18,6 +18,7 @@ typedef enum{
 } State;
 
 State g_current_state;
+int g_last_direction; //---------------------------------------------------
 
 
 
