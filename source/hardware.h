@@ -34,6 +34,15 @@ typedef enum {
 int g_current_floor;
 int g_current_floor_pos;
 
+/**
+ * @brief Checks if a button exist for the given @c floor and @c order_type.
+ *
+ * @param floor Inquired floor.
+ * 
+ * @param order_type Inquired order type.
+ *
+ * @return 1 if the button exist, 0 otherwise.
+ */
 int hardware_legal_floor(int floor, HardwareOrder order_type);
 
 /**
@@ -128,8 +137,16 @@ void hardware_command_stop_light(int on);
  */
 void hardware_command_order_light(int floor, HardwareOrder order_type, int on);
 
+/**
+ * @brief Checks if the elevator is on a floor, and sets floor light to right floor.
+ *
+ * @return 1 if the elevator is on a floor, 0 otherwise.
+ */
 int hardware_check_at_floor();
 
+/**
+ * @brief Turns all orderlights off.
+ */
 void hardware_lights_off();
 
 #endif

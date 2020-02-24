@@ -109,7 +109,6 @@ void FSM_open_door(){
     timer_door();
     hardware_command_door_open(0);
     order_queue();
-    
 }
 
 void FSM_choose_next_state() {
