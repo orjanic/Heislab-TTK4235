@@ -73,7 +73,6 @@ void FSM_idle(){
 }
 
 void FSM_order_dir_up() {
-    g_last_direction = 1; //---------------------------------------------------------
     if (g_current_order->order_active) {
         hardware_command_movement(HARDWARE_MOVEMENT_UP);
         while (g_current_state == STATE_DIR_UP){
@@ -88,7 +87,6 @@ void FSM_order_dir_up() {
 }
 
 void FSM_order_dir_down() {
-    g_last_direction = -1; //-------------------------------------------------------------
     if (g_current_order->order_active){
         hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
         while (g_current_state == STATE_DIR_DOWN){
@@ -106,13 +104,16 @@ void FSM_open_door(){
     g_current_floor_pos = 0;
     hardware_command_door_open(1);
     order_remove(g_current_floor);
-    timer_door();
+    FSM_timer();
     hardware_command_door_open(0);
-    order_queue();
+    order_choose_next_order();
+    FSM_choose_next_state();
 }
 
 void FSM_choose_next_state() {
-    if ((g_current_order->order_floor == g_current_floor) && (g_current_floor_pos == 0)) {
+    if (!g_current_order->order_active) {
+        g_current_state = STATE_IDLE;
+    } else if ((g_current_order->order_floor == g_current_floor) && (g_current_floor_pos == 0)) {
         g_current_state = STATE_OPEN_DOOR;
     }else if((g_current_order->order_floor < g_current_floor) || ((g_current_order->order_floor == g_current_floor) && (g_current_floor_pos == 1))){
         g_current_state = STATE_DIR_DOWN;
@@ -155,4 +156,16 @@ void FSM_stop_not_at_floor() {
     while(hardware_read_stop_signal());
     hardware_command_stop_light(0);
     g_current_state = STATE_IDLE;
+}
+
+void FSM_timer() {
+    clock_t start = clock();
+    while ((g_current_state == STATE_OPEN_DOOR) && (float)((clock()-start)/CLOCKS_PER_SEC) < 3){
+        FSM_check_stop();
+        order_update_list();
+        order_remove(g_current_floor);
+        if (hardware_read_obstruction_signal() || hardware_read_order(g_current_floor, HARDWARE_ORDER_UP) || hardware_read_order(g_current_floor, HARDWARE_ORDER_DOWN) || hardware_read_order(g_current_floor, HARDWARE_ORDER_INSIDE)) {
+            start = clock();
+        }
+    }
 }

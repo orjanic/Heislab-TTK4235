@@ -7,7 +7,7 @@
 #define ORDER_H
 
 #include "hardware.h"
-#include "FSM.h"
+//#include "FSM.h"
 
 /**
  * @brief Struct for describing an order.
@@ -46,20 +46,10 @@ void order_remove(int floor);
 void order_remove_all();
 
 /**
- * @brief Checks @c order_list for active orders.
- * 
- * @return 1 if there are active orders, 0 otherwise.
- */
-int order_check_for_order();
-
-/**
  * @brief Sets @c g_current_order to next order based on the elevator's position.
  */
 void order_choose_next_order();
 
-/**
- * @brief 
- */
-void order_queue();
+
 
 #endif

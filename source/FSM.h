@@ -8,9 +8,8 @@
 
 #include "hardware.h"
 #include "order.h"
-#include "timer.h"
-#include <stdio.h>  //sikker?
-#include <stdlib.h>
+#include <time.h>
+
 
 
 /**
@@ -27,7 +26,6 @@ typedef enum{
 } State;
 
 State g_current_state;
-int g_last_direction; //---------------------------------------------------
 
 
 /**
@@ -81,5 +79,8 @@ void FSM_stop_at_floor();
  * @brief Stops elevator, makes stop light glow and remove all orders while stop button is pressed.
  */
 void FSM_stop_not_at_floor();
+
+
+void FSM_timer();
 
 #endif
