@@ -2,7 +2,7 @@
 #include "channels.h"
 #include "io.h"
 
-//#include <stdlib.h>
+
 
 int hardware_legal_floor(int floor, HardwareOrder order_type) {
     int lower_floor = 0;
@@ -192,10 +192,10 @@ void hardware_command_order_light(int floor, HardwareOrder order_type, int on){
     }
 }
 
-int hardware_check_at_floor() {
+int hardware_check_at_floor(int* p_current_floor) {
     for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++) {
         if(hardware_read_floor_sensor(f)) {
-            g_current_floor = f;
+            *p_current_floor = f;
             hardware_command_floor_indicator_on(f);
             return 1;
         }

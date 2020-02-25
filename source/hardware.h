@@ -31,9 +31,6 @@ typedef enum {
     HARDWARE_ORDER_DOWN
 } HardwareOrder;
 
-int g_current_floor;
-int g_current_floor_pos;
-
 /**
  * @brief Checks if a button exist for the given @c floor and @c order_type.
  *
@@ -139,10 +136,12 @@ void hardware_command_order_light(int floor, HardwareOrder order_type, int on);
 
 /**
  * @brief Checks if the elevator is on a floor, and sets floor light to right floor.
+ * 
+ * @param p_current_floor Sets a pointer to the current floor.
  *
  * @return 1 if the elevator is on a floor, 0 otherwise.
  */
-int hardware_check_at_floor();
+int hardware_check_at_floor(int* p_current_floor);
 
 /**
  * @brief Turns all orderlights off.

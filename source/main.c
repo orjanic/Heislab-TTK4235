@@ -11,6 +11,7 @@ int main(){
         exit(1);
     }
 
-    FSM_state_machine();
+    FSM_run();
 
+    return 0;
 }
