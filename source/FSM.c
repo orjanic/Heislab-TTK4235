@@ -95,9 +95,12 @@ void FSM_dir_up() {
         while (m_current_state == STATE_DIR_UP){
             FSM_check_stop();
             order_update_list(m_order_list);
-            if(hardware_check_at_floor(&m_current_floor) && (m_current_order->order_floor == m_current_floor || m_order_list[0][m_current_floor].order_active || m_order_list[1][m_current_floor].order_active)){
-                hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-                m_current_state = STATE_OPEN_DOOR;
+            if(hardware_check_at_floor(&m_current_floor)) {
+                m_current_floor_pos = 1;
+                if (m_current_order->order_floor == m_current_floor || m_order_list[0][m_current_floor].order_active || m_order_list[1][m_current_floor].order_active) {
+                    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+                    m_current_state = STATE_OPEN_DOOR;
+                }
             }
         }
     }
@@ -109,9 +112,12 @@ void FSM_dir_down() {
         while (m_current_state == STATE_DIR_DOWN){
             FSM_check_stop();
             order_update_list(m_order_list);
-            if(hardware_check_at_floor(&m_current_floor) && (m_current_order->order_floor == m_current_floor || m_order_list[1][m_current_floor].order_active || m_order_list[2][m_current_floor].order_active)){
-                hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-                m_current_state = STATE_OPEN_DOOR;
+            if(hardware_check_at_floor(&m_current_floor)) {
+                m_current_floor_pos = -1;
+                if (m_current_order->order_floor == m_current_floor || m_order_list[1][m_current_floor].order_active || m_order_list[2][m_current_floor].order_active) {
+                    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+                    m_current_state = STATE_OPEN_DOOR;
+                }
             }
         }
     }
