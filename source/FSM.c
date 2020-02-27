@@ -40,10 +40,6 @@ void FSM_run() {
                 break;
             
         }
-        // if (hardware_read_stop_signal() && hardware_read_obstruction_signal() && hardware_read_order(0,HARDWARE_ORDER_UP)){
-        //     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-        //     break;
-        // }
     }
 }
 
@@ -65,6 +61,9 @@ void FSM_init(){
 void FSM_idle(){
     while(m_current_state == STATE_IDLE){
         FSM_check_stop();
+        order_choose_next_order(&m_current_order, m_current_floor, m_order_list);
+        FSM_choose_next_state();
+        /*
         if (order_update_list(m_order_list)) {
             for (int ot = 0; ot < HARDWARE_NUMBER_OF_ORDER_TYPES; ot++){
                 for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
@@ -76,6 +75,7 @@ void FSM_idle(){
                 }
             }
         }
+        */
     }
 }
 

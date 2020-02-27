@@ -3,11 +3,11 @@
 void order_init_list(Order p_order_list[HARDWARE_NUMBER_OF_ORDER_TYPES][HARDWARE_NUMBER_OF_FLOORS]) {
     for (int ot = 0; ot < HARDWARE_NUMBER_OF_ORDER_TYPES; ot++){
         for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
-            if (hardware_legal_floor(f, (HardwareOrder)ot)) {
-                p_order_list[ot][f].order_active = 0;
-                p_order_list[ot][f].order_floor = f;
-                p_order_list[ot][f].order_type = (HardwareOrder)ot;
-            }
+            //if (hardware_legal_floor(f, (HardwareOrder)ot)) {
+            p_order_list[ot][f].order_active = 0;
+            p_order_list[ot][f].order_floor = f;
+            p_order_list[ot][f].order_type = (HardwareOrder)ot;
+            //}
         }
     }
 }

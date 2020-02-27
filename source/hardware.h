@@ -31,16 +31,18 @@ typedef enum {
     HARDWARE_ORDER_DOWN
 } HardwareOrder;
 
-/**
- * @brief Checks if a button exist for the given @c floor and @c order_type.
- *
- * @param floor Inquired floor.
- * 
- * @param order_type Inquired order type.
- *
- * @return 1 if the button exist, 0 otherwise.
- */
-int hardware_legal_floor(int floor, HardwareOrder order_type);
+
+// /**
+//  * @brief Checks if a button exist for the given @c floor and @c order_type.
+//  *
+//  * @param floor Inquired floor.
+//  * 
+//  * @param order_type Inquired order type.
+//  *
+//  * @return 1 if the button exist, 0 otherwise.
+//  */
+// int hardware_legal_floor(int floor, HardwareOrder order_type);
+
 
 /**
  * @brief Initializes the elevator control hardware.
