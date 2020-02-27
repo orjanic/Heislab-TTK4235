@@ -31,7 +31,7 @@ void order_init_list(Order p_order_list[HARDWARE_NUMBER_OF_ORDER_TYPES][HARDWARE
  * 
  * @return 1 if there are new orders, 0 otherwise.
  */
-int order_update_list(Order p_order_list[HARDWARE_NUMBER_OF_ORDER_TYPES][HARDWARE_NUMBER_OF_FLOORS]);
+void order_update_list(Order p_order_list[HARDWARE_NUMBER_OF_ORDER_TYPES][HARDWARE_NUMBER_OF_FLOORS]);
 
 /**
  * @brief Removes all orders on a given @c floor in an order list.

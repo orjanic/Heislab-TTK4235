@@ -60,22 +60,10 @@ void FSM_init(){
 
 void FSM_idle(){
     while(m_current_state == STATE_IDLE){
-        FSM_check_stop();
+        order_update_list(m_order_list);
         order_choose_next_order(&m_current_order, m_current_floor, m_order_list);
         FSM_choose_next_state();
-        /*
-        if (order_update_list(m_order_list)) {
-            for (int ot = 0; ot < HARDWARE_NUMBER_OF_ORDER_TYPES; ot++){
-                for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
-                    if (m_order_list[ot][f].order_active) {
-                        m_current_order = &m_order_list[ot][f];
-                        FSM_choose_next_state();
-                        return;
-                    }
-                }
-            }
-        }
-        */
+        FSM_check_stop();
     }
 }
 
