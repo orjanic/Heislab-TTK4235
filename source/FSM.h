@@ -1,6 +1,6 @@
 /**
  * @file
- * @brief Module to control movement of elevator
+ * @brief Module to control movement of elevator.
 */
 
 #ifndef FSM_H
@@ -78,7 +78,7 @@ void FSM_choose_next_state();
 void FSM_check_stop();
 
 /**
- * @brief Counts down three seconds, resets if obstruction is active or an orderbutton from @c m_current_floor is pressed.
+ * @brief Counts down three seconds, resets if obstruction is active or an order button from @c m_current_floor is pressed.
  */
 void FSM_timer();
 
