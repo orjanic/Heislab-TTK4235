@@ -15,7 +15,7 @@
 /**
  * @brief States used to control the elevators behaviour.
  */
-typedef enum{
+typedef enum {
     STATE_INIT,
     STATE_IDLE,
     STATE_OPEN_DOOR,

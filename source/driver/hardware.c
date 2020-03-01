@@ -8,25 +8,25 @@ static int hardware_legal_floor(int floor, HardwareOrder order_type) {
     int lower_floor = 0;
     int upper_floor = HARDWARE_NUMBER_OF_FLOORS - 1;
 
-    if((floor < lower_floor) || (floor > upper_floor)){
+    if((floor < lower_floor) || (floor > upper_floor)) {
         return 0;
     }
 
-    if((floor == lower_floor) && (order_type == HARDWARE_ORDER_DOWN)){
+    if((floor == lower_floor) && (order_type == HARDWARE_ORDER_DOWN)) {
         return 0;
     }
 
-    if((floor == upper_floor) && (order_type == HARDWARE_ORDER_UP)){
+    if((floor == upper_floor) && (order_type == HARDWARE_ORDER_UP)) {
         return 0;
     }
 
     return 1;
 }
 
-static int hardware_order_type_bit(HardwareOrder order_type){
+static int hardware_order_type_bit(HardwareOrder order_type) {
     int type_bit;
 
-    switch(order_type){
+    switch(order_type) {
         case HARDWARE_ORDER_UP:
             type_bit = 0;
             break;
@@ -43,17 +43,17 @@ static int hardware_order_type_bit(HardwareOrder order_type){
     return type_bit;
 }
 
-int hardware_init(){
-    if(!io_init()){
+int hardware_init() {
+    if(!io_init()) {
         return 1;
     }
 
-    for(int i = 0; i < HARDWARE_NUMBER_OF_FLOORS; i++){
-        if(i != 0){
+    for(int i = 0; i < HARDWARE_NUMBER_OF_FLOORS; i++) {
+        if(i != 0) {
             hardware_command_order_light(HARDWARE_ORDER_DOWN, i, 0);
         }
 
-        if(i != HARDWARE_NUMBER_OF_FLOORS - 1){
+        if(i != HARDWARE_NUMBER_OF_FLOORS - 1) {
             hardware_command_order_light(HARDWARE_ORDER_UP, i, 0);
         }
 
@@ -67,8 +67,8 @@ int hardware_init(){
     return 0;
 }
 
-void hardware_command_movement(HardwareMovement movement){
-    switch(movement){
+void hardware_command_movement(HardwareMovement movement) {
+    switch(movement) {
         case HARDWARE_MOVEMENT_UP:
             io_clear_bit(MOTORDIR);
             io_write_analog(MOTOR, 2800);
@@ -85,17 +85,17 @@ void hardware_command_movement(HardwareMovement movement){
     }
 }
 
-int hardware_read_stop_signal(){
+int hardware_read_stop_signal() {
     return io_read_bit(STOP);
 }
 
-int hardware_read_obstruction_signal(){
+int hardware_read_obstruction_signal() {
     return io_read_bit(OBSTRUCTION);
 }
 
-int hardware_read_floor_sensor(int floor){
+int hardware_read_floor_sensor(int floor) {
     int floor_bit;
-    switch(floor){
+    switch(floor) {
         case 0:
             floor_bit = SENSOR_FLOOR1;
             break;
@@ -119,8 +119,8 @@ int hardware_read_floor_sensor(int floor){
     return io_read_bit(floor_bit);
 }
 
-int hardware_read_order(int floor, HardwareOrder order_type){
-    if(!hardware_legal_floor(floor, order_type)){
+int hardware_read_order(int floor, HardwareOrder order_type) {
+    if(!hardware_legal_floor(floor, order_type)) {
         return 0;
     }
 
@@ -136,42 +136,42 @@ int hardware_read_order(int floor, HardwareOrder order_type){
     return io_read_bit(order_bit_lookup[floor][type_bit]);
 }
 
-void hardware_command_door_open(int door_open){
-    if(door_open){
+void hardware_command_door_open(int door_open) {
+    if(door_open) {
         io_set_bit(LIGHT_DOOR_OPEN);
     }
-    else{
+    else {
         io_clear_bit(LIGHT_DOOR_OPEN);
     }
 }
 
-void hardware_command_floor_indicator_on(int floor){
-    if(floor & 0x02){
+void hardware_command_floor_indicator_on(int floor) {
+    if(floor & 0x02) {
         io_set_bit(LIGHT_FLOOR_IND1);
     }
-    else{
+    else {
         io_clear_bit(LIGHT_FLOOR_IND1);
     }
 
-    if(floor & 0x01){
+    if(floor & 0x01) {
         io_set_bit(LIGHT_FLOOR_IND2);
     }
-    else{
+    else {
         io_clear_bit(LIGHT_FLOOR_IND2);
     }
 }
 
-void hardware_command_stop_light(int on){
-    if(on){
+void hardware_command_stop_light(int on) {
+    if(on) {
         io_set_bit(LIGHT_STOP);
     }
-    else{
+    else {
         io_clear_bit(LIGHT_STOP);
     }
 }
 
-void hardware_command_order_light(int floor, HardwareOrder order_type, int on){
-    if(!hardware_legal_floor(floor, order_type)){
+void hardware_command_order_light(int floor, HardwareOrder order_type, int on) {
+    if(!hardware_legal_floor(floor, order_type)) {
         return;
     }
 
@@ -184,10 +184,10 @@ void hardware_command_order_light(int floor, HardwareOrder order_type, int on){
 
     int type_bit = hardware_order_type_bit(order_type);
 
-    if(on){
+    if(on) {
         io_set_bit(light_bit_lookup[floor][type_bit]);
     }
-    else{
+    else {
         io_clear_bit(light_bit_lookup[floor][type_bit]);
     }
 }
